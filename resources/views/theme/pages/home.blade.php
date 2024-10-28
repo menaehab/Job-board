@@ -1,4 +1,5 @@
 @extends('theme.layouts.master')
+@section('title', 'Home')
 @section('content')
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
