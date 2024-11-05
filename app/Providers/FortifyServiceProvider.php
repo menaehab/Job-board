@@ -46,6 +46,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureRoutes();
 
         Fortify::loginView('theme.pages.login');
+        Fortify::registerView('theme.pages.employee-register');
     }
 
     protected function configureRoutes()

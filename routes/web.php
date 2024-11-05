@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\RoutePath;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,6 @@ Route::middleware([
             return view('dashboard');
         })->name('dashboard');
     });
-
 
 // Route::get('/', function () {
 //     return view('welcome');
