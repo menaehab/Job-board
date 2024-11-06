@@ -131,4 +131,14 @@ class LoginController extends Controller
 
         return app(LogoutResponse::class);
     }
+
+    public function logoutEmployer(Request $request)
+    {
+    Auth::guard('employer')->logout();
+    if ($request->hasSession()) {
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    }
+    return redirect()->route('home');
+    }
 }

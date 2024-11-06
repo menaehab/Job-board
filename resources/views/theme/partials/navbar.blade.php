@@ -17,14 +17,29 @@
                     <a href="404.html" class="dropdown-item">404</a>
                 </div>
             </div>
-            <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Register</a>
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="{{ route('register') }}" class="dropdown-item">As employee</a>
-                    <a href="{{ route('employer-register') }}" class="dropdown-item">As employer</a>
+            @if (Auth::guard('employer')->user() || Auth::user())
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown">{{ Auth::guard('employer')->check() ? Auth::guard('employer')->user()->name : Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <form method="POST"
+                            action="{{ Auth::guard('employer')->check() ? route('logoutEmployer') : route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @else
+                <a href="{{ route('login') }}" class="nav-item nav-link">Login</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Register</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="{{ route('register') }}" class="dropdown-item">As employee</a>
+                        <a href="{{ route('employer-register') }}" class="dropdown-item">As employer</a>
+                    </div>
+                </div>
+            @endif
         </div>
         <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i
                 class="fa fa-arrow-right ms-3"></i></a>

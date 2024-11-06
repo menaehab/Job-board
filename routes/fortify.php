@@ -46,6 +46,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     Route::post(RoutePath::for('logout', '/logout'), [LoginController::class, 'destroy'])
         ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
         ->name('logout');
+        Route::post('/logoutEmployer', [LoginController::class, 'logoutEmployer'])
+        ->middleware(['auth:employer'])
+        ->name('logoutEmployer');
 
     // Password Reset...
     if (Features::enabled(Features::resetPasswords())) {
