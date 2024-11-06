@@ -1,13 +1,16 @@
 <?php
 
-namespace Laravel\Fortify\Http\Controllers;
+namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Employer;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Features;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
@@ -18,8 +21,7 @@ use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
-
-class AuthenticatedSessionController extends Controller
+class LoginController extends Controller
 {
     /**
      * The guard implementation.
@@ -58,9 +60,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        return $this->loginPipeline($request)->then(function ($request) {
-            return app(LoginResponse::class);
-        });
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        $employer = Employer::where('email', $request->email)->first();
+
+        if ($user)
+        {
+            if (Auth::guard('web')->attempt($credentials)) {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+        }
+        elseif ($employer)
+        {
+            if (Auth::guard('employer')->attempt($credentials)) {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+        }
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**

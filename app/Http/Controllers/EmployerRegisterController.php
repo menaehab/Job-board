@@ -59,8 +59,7 @@ class EmployerRegisterController extends Controller
      * @param  \Laravel\Fortify\Contracts\CreatesNewUsers  $creator
      * @return \Laravel\Fortify\Contracts\RegisterResponse
      */
-    public function store(Request $request,
-                          CreatesNewUsers $creator): RegisterResponse
+    public function store(Request $request): RegisterResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -72,17 +71,14 @@ class EmployerRegisterController extends Controller
             $request->merge([Fortify::username() => Str::lower($request->{Fortify::username()})]);
         }
 
-        // Create the employer and hash the password
         $employer = Employer::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
         ]);
 
-        // Fire the registered event for the new employer
         event(new Registered($employer));
 
-        // Log the employer in
         $this->guard->login($employer);
 
         return app(RegisterResponse::class);
