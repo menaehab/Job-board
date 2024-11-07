@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function __construct(StatefulGuard $guard)
     {
-        $this->guard = Auth::guard('employer');;
+        $this->guard = Auth::guard('employer');
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
 
-use Laravel\Fortify\Features;
-use Laravel\Fortify\RoutePath;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -16,7 +15,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home' ])->name('home');
+Route::get('/', action: [HomeController::class, 'home' ])->name('home');
 
 // Route::get('/testing', function () {
 //     return view('theme.pages.login');

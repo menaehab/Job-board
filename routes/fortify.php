@@ -29,7 +29,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     // Authentication...
     if ($enableViews) {
         Route::get(RoutePath::for('login', '/login'), [AuthenticatedSessionController::class, 'create'])
-            ->middleware(['guest:'.config('fortify.guard')])
+        ->middleware(['guest', 'RedirectIfEmployer'])
             ->name('login');
     }
 
@@ -75,10 +75,10 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     if (Features::enabled(Features::registration())) {
         if ($enableViews) {
             Route::get(RoutePath::for('register', 'employee/register'), [RegisteredUserController::class, 'create'])
-                ->middleware(['guest:'.config('fortify.guard')])
+                ->middleware(['guest', 'RedirectIfEmployer'])
                 ->name('register');
             Route::get(RoutePath::for('employer-register', 'employer/register'), [EmployerRegisterController::class, 'employer_create'])
-                ->middleware(['guest:'.config('fortify.guard')])
+                ->middleware(['guest', 'RedirectIfEmployer'])
                 ->name('employer-register');
         }
 
