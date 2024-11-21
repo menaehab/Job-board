@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,11 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', action: [HomeController::class, 'home' ])->name('home');
 
-// Route::get('/testing', function () {
-//     return view('theme.pages.login');
-// });
+Route::resource( 'jobs', JobController::class);
+
+Route::get('/testing', function () {
+    return view('theme.pages.job-detail');
+});
 
 Route::middleware([
     'auth:sanctum',

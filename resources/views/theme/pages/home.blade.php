@@ -16,10 +16,9 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum
                                     dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd
                                     rebum sea elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search
+                                <a href="{{ route('jobs.index') }}"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search
                                     A Job</a>
-                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
-                                    Talent</a>
                             </div>
                         </div>
                     </div>
@@ -37,10 +36,9 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum
                                     dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd
                                     rebum sea elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search
+                                <a href="{{ route('jobs.index') }}"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search
                                     A Job</a>
-                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
-                                    Talent</a>
                             </div>
                         </div>
                     </div>
@@ -87,7 +85,7 @@
     <!-- Search End --> --}}
 
 
-    <!-- Category Start -->
+    {{-- <!-- Category Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
@@ -151,7 +149,7 @@
             </div>
         </div>
     </div>
-    <!-- Category End -->
+    <!-- Category End --> --}}
     <!-- Jobs Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -159,12 +157,11 @@
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <x-job />
-                        <x-job />
-                        <x-job />
-                        <x-job />
-                        <x-job />
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        @foreach ($jobs as $job)
+                            <x-job :jobName="$job->job_name" :location="$job->location" :employmentType="$job->employment_type" :companyImage="$job->employer->profile_photo_url" :date="$job->created_at->format('Y-m-d')"
+                                :minSalary="$job->salary_min" :maxSalary="$job->salary_max" :data-title="$job->job_name" :data-location="$job->location" :data-type="$job->employment_type" />
+                        @endforeach
+                        <a class="btn btn-primary py-3 px-5" href="{{ route('jobs.index') }}">Browse More Jobs</a>
                     </div>
                 </div>
             </div>

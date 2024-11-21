@@ -41,8 +41,13 @@
                 </div>
             @endif
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i
-                class="fa fa-arrow-right ms-3"></i></a>
+        @if (Auth::guard('employer')->user())
+            <a href="{{ route('jobs.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+                Job<i class="fa fa-arrow-right ms-3"></i></a>
+        @else
+            <a href="{{ route('jobs.index') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Find A
+                Job<i class="fa fa-arrow-right ms-3"></i></a>
+        @endif
     </div>
 </nav>
 <!-- Navbar End -->

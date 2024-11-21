@@ -11,9 +11,18 @@ class Job extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public string $jobName, $location, $employmentType, $companyImage, $date;
+    public int $minSalary, $maxSalary;
+
+    public function __construct(string $jobName, string $location, string $employmentType, string $companyImage, string $date, int $minSalary, int $maxSalary)
     {
-        //
+        $this->jobName = $jobName;
+        $this->location = $location;
+        $this->employmentType = $employmentType;
+        $this->companyImage = $companyImage;
+        $this->date = $date;
+        $this->minSalary = $minSalary;
+        $this->maxSalary = $maxSalary;
     }
 
     /**
