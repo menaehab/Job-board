@@ -11,10 +11,10 @@ class Job extends Component
     /**
      * Create a new component instance.
      */
-    public string $jobName, $location, $employmentType, $companyImage, $date;
+    public string $jobName, $location, $employmentType, $companyImage, $date,$slug;
     public int $minSalary, $maxSalary;
 
-    public function __construct(string $jobName, string $location, string $employmentType, string $companyImage, string $date, int $minSalary, int $maxSalary)
+    public function __construct(string $jobName, string $location, string $employmentType, string $companyImage, string $date, int $minSalary, int $maxSalary,string $slug)
     {
         $this->jobName = $jobName;
         $this->location = $location;
@@ -23,6 +23,7 @@ class Job extends Component
         $this->date = $date;
         $this->minSalary = $minSalary;
         $this->maxSalary = $maxSalary;
+        $this->slug = $slug;
     }
 
     /**

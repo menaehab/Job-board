@@ -34,6 +34,6 @@ Route::middleware([
         })->name('dashboard');
     });
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/test', function () {
+//     return view('theme.pages.job-detail');
 // });

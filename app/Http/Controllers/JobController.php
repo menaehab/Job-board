@@ -51,7 +51,7 @@ class JobController extends Controller
      */
     public function show(job $job)
     {
-        return view('theme.pages.job-detail');
+        return view('theme.pages.job-detail',get_defined_vars());
     }
 
     /**
