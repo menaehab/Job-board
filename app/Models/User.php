@@ -58,4 +58,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function job_applications()
+    {
+        return $this->hasMany(Job_Application::class);
+    }
 }

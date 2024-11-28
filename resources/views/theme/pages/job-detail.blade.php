@@ -6,6 +6,11 @@
 @section('content')
     <x-header title="Job Detail" />
     <!-- Job Detail Start -->
+    @if (session('success'))
+        <div class="alert alert-success text-center" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gy-5 gx-4">
@@ -36,31 +41,59 @@
                         </ul>
                     </div>
 
-                    <div class="">
-                        <h4 class="mb-4">Apply For The Job</h4>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Your Name">
+                    @if (Auth::user())
+                        <div class="">
+                            <h4 class="mb-4">Apply For The Job</h4>
+                            <form action="{{ route('job-applications.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="job_id" value="{{ $job->id }}">
+                                <div class="row g-3">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Enter your Name">
+                                        <label for="name">Name</label>
+                                        @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="enter your Email">
+                                        <label for="email">Email</label>
+                                        @error('email')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" name="portfolio" class="form-control"
+                                            placeholder="Enter portfolio Website">
+                                        <label for="portfolio">Portfolio Website</label>
+                                        @error('portfolio')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="file" name="cv" class="form-control bg-white">
+                                        <label for="cv">Upload CV</label>
+                                        @error('cv')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea class="form-control" name="cover_letter" rows="5" placeholder="Enter coverletter"></textarea>
+                                        <label for="coverletter">Enter Coverletter</label>
+                                        @error('cover_letter')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control" placeholder="Your Email">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Portfolio Website">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="file" class="form-control bg-white">
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100" type="submit">Apply Now</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-lg-4">

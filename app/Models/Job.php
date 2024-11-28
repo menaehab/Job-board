@@ -29,6 +29,11 @@ class Job extends Model
         return $this->belongsTo(Employer::class);
     }
 
+    public function job_applications()
+    {
+        return $this->hasMany(Job_Application::class);
+    }
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()

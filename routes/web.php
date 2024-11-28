@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 
 /*
@@ -19,6 +20,8 @@ use App\Http\Controllers\JobController;
 Route::get('/', action: [HomeController::class, 'home' ])->name('home');
 
 Route::resource( 'jobs', JobController::class);
+
+Route::resource('job-applications', JobApplicationController::class)->only(['store']);
 
 Route::get('/testing', function () {
     return view('theme.pages.job-detail');
