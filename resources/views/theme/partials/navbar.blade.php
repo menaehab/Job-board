@@ -16,6 +16,7 @@
                         data-bs-toggle="dropdown">{{ Auth::guard('employer')->check() ? Auth::guard('employer')->user()->name : Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu rounded-0 m-0">
+                        <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
                         <form method="POST"
                             action="{{ Auth::guard('employer')->check() ? route('logoutEmployer') : route('logout') }}">
                             @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsAuthenticate;
 use App\Http\Middleware\IsEmployer;
 use App\Http\Middleware\RedirectIfEmployer;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'IsEmployer' => IsEmployer::class,
         'RedirectIfEmployer' => RedirectIfEmployer::class,
+        'IsAuth' => IsAuthenticate::class,
     ];
 }

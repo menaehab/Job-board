@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,8 @@ Route::resource( 'jobs', JobController::class);
 
 Route::resource('job-applications', JobApplicationController::class)->only(['store']);
 
-Route::get('/testing', function () {
-    return view('theme.pages.job-detail');
-});
+Route::get('profile',[ProfileController::class,'index'])->name('profile')->middleware('IsAuth');
+Route::put('profile',[ProfileController::class,'update'])->name('profile.update')->middleware('IsAuth');
 
 Route::middleware([
     'auth:sanctum',
@@ -36,6 +36,11 @@ Route::middleware([
             return view('dashboard');
         })->name('dashboard');
     });
+
+// Route::get('/testing', function () {
+//     return view('theme.pages.job-detail');
+// });
+
 
 // Route::get('/test', function () {
 //     return view('theme.pages.job-detail');

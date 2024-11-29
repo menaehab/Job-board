@@ -158,7 +158,7 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         @foreach ($jobs as $job)
-                            <x-job :jobName="$job->job_name" :location="$job->location" :employmentType="$job->employment_type" :companyImage="$job->employer->profile_photo_url" :date="$job->created_at->format('Y-m-d')"
+                            <x-job :jobName="$job->job_name" :location="$job->location" :employmentType="$job->employment_type" :companyImage="str_replace('http://localhost', '', $job->employer->profile_photo_url)" :date="$job->created_at->format('Y-m-d')"
                                 :minSalary="$job->salary_min" :maxSalary="$job->salary_max" :data-title="$job->job_name" :data-location="$job->location" :data-type="$job->employment_type"
                                 :slug="$job->slug" />
                         @endforeach

@@ -13,6 +13,7 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use Laravel\Fortify\Http\Controllers\ProfileInformationController;
 use App\Http\Controllers\EmployerRegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use Laravel\Fortify\Http\Controllers\TwoFactorSecretKeyController;
 use Laravel\Fortify\Http\Controllers\ConfirmablePasswordController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -22,6 +23,7 @@ use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController;
 use Laravel\Fortify\Http\Controllers\EmailVerificationNotificationController;
 use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\ConfirmedTwoFactorAuthenticationController;
+use Laravel\Fortify\Http\Controllers\EditedProfileInformationController;
 
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
     $enableViews = config('fortify.views', true);
@@ -107,7 +109,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
 
     // Profile Information...
     if (Features::enabled(Features::updateProfileInformation())) {
-        Route::put(RoutePath::for('user-profile-information.update', '/user/profile-information'), [ProfileInformationController::class, 'update'])
+        Route::put(RoutePath::for('user-profile-information.update', '/user/profile-information'), [ProfileController::class, 'update'])
             ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
             ->name('user-profile-information.update');
     }
