@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\EnsureEmployerOwnsJob;
 use App\Http\Middleware\IsAuthenticate;
 use App\Http\Middleware\IsEmployer;
 use App\Http\Middleware\RedirectIfEmployer;
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'IsEmployer' => IsEmployer::class,
         'RedirectIfEmployer' => RedirectIfEmployer::class,
         'IsAuth' => IsAuthenticate::class,
+        'EnsureEmployerOwnJob' => EnsureEmployerOwnsJob::class,
     ];
 }

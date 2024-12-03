@@ -6,6 +6,7 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorejobRequest;
 use App\Http\Requests\UpdatejobRequest;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -13,6 +14,7 @@ class JobController extends Controller
     public function __construct()
     {
         $this->middleware('auth:employer')->only('create');
+        $this->middleware('EnsureEmployerOwnJob')->only(['edit','update','destory']);
     }
     /**
      * Display a listing of the resource.
