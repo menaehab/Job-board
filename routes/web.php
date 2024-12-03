@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\EmployerJobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobApplicationController;
@@ -24,8 +24,12 @@ Route::resource( 'jobs', JobController::class);
 
 Route::resource('job-applications', JobApplicationController::class)->only(['store']);
 
-Route::get('profile',[ProfileController::class,'index'])->name('profile')->middleware('IsAuth');
-Route::put('profile',[ProfileController::class,'update'])->name('profile.update')->middleware('IsAuth');
+Route::prefix('profile')->middleware('IsAuth')->controller(ProfileController::class)->group(function () {
+    Route::get('/', 'index')->name('profile');
+    Route::put('/', 'update')->name('profile.update');
+});
+
+Route::get('my-jobs', [EmployerJobController::class, 'postedJobs'])->name('my-jobs')->middleware('auth:employer');
 
 Route::middleware([
     'auth:sanctum',

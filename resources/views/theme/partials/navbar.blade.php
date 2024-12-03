@@ -16,6 +16,9 @@
                         data-bs-toggle="dropdown">{{ Auth::guard('employer')->check() ? Auth::guard('employer')->user()->name : Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu rounded-0 m-0">
+                        @if (Auth::guard('employer')->check())
+                            <a href="{{ route('my-jobs') }}" class="dropdown-item">My Jobs</a>
+                        @endif
                         <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
                         <form method="POST"
                             action="{{ Auth::guard('employer')->check() ? route('logoutEmployer') : route('logout') }}">
@@ -36,7 +39,8 @@
             @endif
         </div>
         @if (Auth::guard('employer')->user())
-            <a href="{{ route('jobs.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+            <a href="{{ route('jobs.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
+                A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
         @else
             <a href="{{ route('jobs.index') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Find A
