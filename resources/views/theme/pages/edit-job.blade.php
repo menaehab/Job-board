@@ -1,18 +1,19 @@
 @extends('theme.layouts.master')
 
-@section('title', 'create a job')
-@section('page-title', 'Create A Job')
+@section('title', 'Edit a job')
+@section('page-title', 'Edit A Job')
 
 @section('content')
-    <x-header title="Create a job" />
+    <x-header title="Edit a job" />
     <div class="container py-5 my-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form method="POST" action="{{ route('jobs.store') }}">
+                <form method="POST" action="{{ route('jobs.update', $job) }}">
                     @csrf
+                    @method('PUT')
                     <!-- job_name input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input name="job_name" value="{{ old('job_name') }}" placeholder="Enter Job name" type="text"
+                        <input name="job_name" value="{{ $job->job_name }}" placeholder="Enter Job name" type="text"
                             id="form2Example1" class="form-control" />
                         <label class="form-label" for="form2Example1">Job Name</label>
                         @error('job_name')
@@ -23,12 +24,13 @@
                     <!-- employment_type input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <select name="employment_type" id="employment_type" class="form-select">
-                            <option value="full-time" {{ old('employment_type') === 'full-time' ? 'selected' : '' }}>
+                            <option value="full-time" {{ $job->employment_type === 'full-time' ? 'selected' : '' }}>
                                 Full-time</option>
-                            <option value="part-time" {{ old('employment_type') === 'part-time' ? 'selected' : '' }}>
+                            <option value="part-time" {{ $job->employment_type === 'part-time' ? 'selected' : '' }}>
                                 Part-time</option>
                         </select>
-                        <label class="form-label" for="form2Example1">Employment Type</label>
+                        <label class="form-label" for="form2Example1">Employment
+                            Type</label>
                         @error('employment_type')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -36,8 +38,8 @@
 
                     <!-- salary_min input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input name="salary_min" value="{{ old('salary_min') }}" placeholder="Enter job Minmum Salary"
-                            type="number  " id="form2Example1" class="form-control" />
+                        <input name="salary_min" placeholder="Enter job Minmum Salary" type="number"
+                            value="{{ $job->salary_min }}" id="form2Example1" class="form-control" />
                         <label class="form-label" for="form2Example1">Minmum Salary</label>
                         @error('salary_min')
                             <p class="text-danger">{{ $message }}</p>
@@ -46,7 +48,7 @@
 
                     <!-- salary_min input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input name="salary_max" value="{{ old('salary_max') }}" placeholder="Enter job Maxmum Salary"
+                        <input name="salary_max" value="{{ $job->salary_max }}" placeholder="Enter job Maxmum Salary"
                             type="number  " id="form2Example1" class="form-control" />
                         <label class="form-label" for="form2Example1">Maxmum Salary</label>
                         @error('salary_max')
@@ -57,7 +59,7 @@
                     <!-- Location input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <input type="text" name="location" id="location" class="form-control"
-                            value="{{ old('location') }}" placeholder="Enter job location">
+                            value="{{ $job->location }}" placeholder="Enter job location">
                         <label class="form-label" for="form2Example1">Location</label>
 
                         @error('location')
@@ -68,7 +70,7 @@
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="5" placeholder="Enter job description">{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" class="form-control" rows="5" placeholder="Enter job description">{{ $job->description }}</textarea>
                         @error('description')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -78,7 +80,7 @@
                     <div class="mb-3">
                         <label for="requirements" class="form-label">Requirements</label>
                         <textarea name="requirements" id="requirements" class="form-control" rows="5"
-                            placeholder="Enter job requirements">{{ old('requirements') }}</textarea>
+                            placeholder="Enter job requirements">{{ $job->requirements }}</textarea>
                         @error('requirements')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

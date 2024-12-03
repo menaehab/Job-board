@@ -59,7 +59,7 @@ class JobController extends Controller
      */
     public function edit(job $job)
     {
-        //
+        return view('theme.pages.edit-job', get_defined_vars());
     }
 
     /**
@@ -67,7 +67,9 @@ class JobController extends Controller
      */
     public function update(UpdatejobRequest $request, job $job)
     {
-        //
+        $data = $request->validated();
+        $job->update($data);
+        return redirect()->route('jobs.index')->with('success', 'Job Edited successfully');
     }
 
     /**
@@ -75,6 +77,7 @@ class JobController extends Controller
      */
     public function destroy(job $job)
     {
-        //
+        $job->delete();
+        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully');
     }
 }

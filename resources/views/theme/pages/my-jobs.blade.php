@@ -53,11 +53,14 @@
                                                 <a class="btn btn-primary me-2"
                                                     href="{{ route('jobs.show', $job->slug) }}">Applies</a>
                                                 <a class="btn btn-primary me-2"
-                                                    href="{{ route('jobs.show', $job->slug) }}">Edit</a>
+                                                    href="{{ route('jobs.edit', $job->slug) }}">Edit</a>
                                                 <a class="btn btn-primary me-2"
                                                     href="{{ route('jobs.show', $job->slug) }}">Show</a>
-                                                <a class="btn btn-primary"
-                                                    href="{{ route('jobs.show', $job->slug) }}">Delete</a>
+                                                <form action="{{ route('jobs.destroy', $job->slug) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-primary" type="submit">Delete</button>
+                                                </form>
                                             </div>
                                             <small class="text-truncate"><i
                                                     class="far fa-calendar-alt text-primary me-2"></i>{{ $job->created_at->format('Y-m-d') }}</small>
