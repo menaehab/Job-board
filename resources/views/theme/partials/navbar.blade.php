@@ -18,6 +18,7 @@
                     <div class="dropdown-menu rounded-0 m-0">
                         @if (Auth::guard('employer')->check())
                             <a href="{{ route('my-jobs') }}" class="dropdown-item">My Jobs</a>
+                            <a href="{{ route('job-applications.index') }}" class="dropdown-item">Applications</a>
                         @endif
                         <a href="{{ route('profile') }}" class="dropdown-item">Profile</a>
                         <form method="POST"

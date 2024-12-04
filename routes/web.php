@@ -22,7 +22,7 @@ Route::get('/', action: [HomeController::class, 'home' ])->name('home');
 
 Route::resource( 'jobs', JobController::class);
 
-Route::resource('job-applications', JobApplicationController::class)->only(['store']);
+Route::resource('job-applications', JobApplicationController::class)->only(['store','index']);
 
 Route::prefix('profile')->middleware('IsAuth')->controller(ProfileController::class)->group(function () {
     Route::get('/', 'index')->name('profile');
@@ -41,9 +41,9 @@ Route::middleware([
         })->name('dashboard');
     });
 
-// Route::get('/testing', function () {
-//     return view('theme.pages.job-detail');
-// });
+Route::get('/testing', function () {
+    return view('theme.pages.applies');
+});
 
 
 // Route::get('/test', function () {

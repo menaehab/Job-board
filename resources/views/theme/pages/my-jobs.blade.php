@@ -51,8 +51,6 @@
                                             class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                             <div class="d-flex mb-3">
                                                 <a class="btn btn-primary me-2"
-                                                    href="{{ route('jobs.show', $job->slug) }}">Applies</a>
-                                                <a class="btn btn-primary me-2"
                                                     href="{{ route('jobs.edit', $job->slug) }}">Edit</a>
                                                 <a class="btn btn-primary me-2"
                                                     href="{{ route('jobs.show', $job->slug) }}">Show</a>
