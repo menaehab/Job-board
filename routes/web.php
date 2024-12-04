@@ -37,13 +37,13 @@ Route::middleware([
     'verified',
     ])->group(function () {
         Route::get('/dashboard', function () {
-            return view('dashboard');
+            return to_route('home');
         })->name('dashboard');
     });
 
-Route::get('/testing', function () {
-    return view('theme.pages.applies');
-});
+// Route::get('/testing', function () {
+//     return view('theme.pages.applies');
+// });
 
 
 // Route::get('/test', function () {

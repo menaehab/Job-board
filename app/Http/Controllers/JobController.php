@@ -6,7 +6,6 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorejobRequest;
 use App\Http\Requests\UpdatejobRequest;
-use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
